@@ -23,15 +23,6 @@ to setup3
   ;ask patches[ set pcolor random 255] ; this program supports any colors
 end
 
-to truesetup
-  ca
-  set x min-pxcor ; initializing variable
-  set y min-pycor ; see above comment
-  ask patches[set colhold []] ;set each patch such that their own variable is an empty set
-  resize-world -16 16 -16 16
-  ask patches[ set pcolor random 255] ; this program supports any colors
-end
-
 
 to checkerboard
   ask patches[
@@ -193,23 +184,6 @@ BUTTON
 99
 NIL
 setup3\n
-NIL
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
-
-BUTTON
-9
-389
-95
-422
-NIL
-truesetup
 NIL
 1
 T
