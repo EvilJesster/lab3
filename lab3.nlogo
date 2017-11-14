@@ -66,11 +66,20 @@ to go
   ]
 
   ask patches[
+    ifelse (length (modes colhold)) > 1[
     let k (item 0 (modes colhold))
     let h occurrences k colhold
-    if (h > 3)[
-    set pcolor item 0 (modes colhold) ; I love lists
+    let w (item 1 (modes colhold))
+    let r occurrences w colhold
+
+    if (not (r > 3)) [
+       if (h > 3)[
+          set pcolor item 0 (modes colhold) ; I love lists
+       ]
     ]
+    ][ set pcolor item 0 (modes colhold)]
+
+
   ]
 
   ;show count patches with pcolor = red
