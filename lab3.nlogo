@@ -66,7 +66,11 @@ to go
   ]
 
   ask patches[
+    let k (item 0 (modes colhold))
+    let h occurrences k colhold
+    if (h > 3)[
     set pcolor item 0 (modes colhold) ; I love lists
+    ]
   ]
 
   ;show count patches with pcolor = red
@@ -76,6 +80,8 @@ to go
   show bluenum ;calling reporter to update the monitors
   show greennum ;calling reporter to update the monitors
 end
+
+
 
 
 
@@ -90,6 +96,12 @@ end
 
 to-report greennum
   report count patches with[ pcolor = 65] ;report for the monitors
+end
+
+
+to-report occurrences [o the-list] ; source for this procedure is the netlogo reference
+  report reduce
+    [ [occurrence-count next-item] -> ifelse-value (next-item = o) [occurrence-count + 1] [occurrence-count] ] (fput 0 the-list)
 end
 @#$#@#$#@
 GRAPHICS-WINDOW

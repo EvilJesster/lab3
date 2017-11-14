@@ -23,6 +23,15 @@ to setup3
   ;ask patches[ set pcolor random 255] ; this program supports any colors
 end
 
+to truesetup
+  ca
+  set x min-pxcor ; initializing variable
+  set y min-pycor ; see above comment
+  ask patches[set colhold []] ;set each patch such that their own variable is an empty set
+  resize-world -16 16 -16 16
+  ask patches[ set pcolor random 255] ; this program supports any colors
+end
+
 
 to checkerboard
   ask patches[
@@ -57,7 +66,11 @@ to go
   ]
 
   ask patches[
+    let k (item 0 (modes colhold))
+    let h occurrences k colhold
+    if (h = 3)[
     set pcolor item 0 (modes colhold) ; I love lists
+
   ]
 
   ;show count patches with pcolor = red
@@ -67,6 +80,8 @@ to go
   show bluenum ;calling reporter to update the monitors
   show greennum ;calling reporter to update the monitors
 end
+
+
 
 
 
@@ -81,6 +96,12 @@ end
 
 to-report greennum
   report count patches with[ pcolor = 65] ;report for the monitors
+end
+
+
+to-report occurrences [o the-list] ; source for this procedure is the netlogo reference
+  report reduce
+    [ [occurrence-count next-item] -> ifelse-value (next-item = o) [occurrence-count + 1] [occurrence-count] ] (fput 0 the-list)
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -184,6 +205,23 @@ BUTTON
 99
 NIL
 setup3\n
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+9
+389
+95
+422
+NIL
+truesetup
 NIL
 1
 T
